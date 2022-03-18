@@ -3,12 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6502dasm", "6502dasm\6502dasm.vcxproj", "{5536A676-74BF-4A0E-A7E6-859814EAB594}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Example Program", "Example Program\Example Program.vcxproj", "{379198AE-2A37-4865-9ED0-449E538E2276}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5536A676-74BF-4A0E-A7E6-859814EAB594} = {5536A676-74BF-4A0E-A7E6-859814EAB594}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6502dasm", "6502dasm\6502dasm.vcxproj", "{5536A676-74BF-4A0E-A7E6-859814EAB594}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

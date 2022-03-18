@@ -808,7 +808,7 @@ optional<const Disassembler6502::InstructionStruct> Disassembler6502::instructio
 		*addressingMode,
 		*opcode,
 		Disassembler6502::argumentNumberFromAddressingMode(*addressingMode)
-		});
+	});
 }
 
 Disassembler6502::Disassembler6502() : argumentNumberCount(0), currentDataOffset(0) {};
@@ -858,8 +858,8 @@ void Disassembler6502::analyze(Disassembler6502::DataBitset data)
 }
 
 optional<Disassembler6502::string> Disassembler6502::to_string() const {
-	// if there're arguments, operand must have a value. if there are 0 arguments, operand cannot have a value
-	if (!instruction.has_value() || ((instruction->argumentNumber > 0) ^ operand.has_value())) {
+	// if there are any arguments, operand must have a value. if there are 0 arguments, operand cannot have a value
+	if (!instruction.has_value() || ((instruction->argumentNumber > 0) != operand.has_value())) {
 		return optional<Disassembler6502::string>();
 	}
 
@@ -870,7 +870,7 @@ optional<Disassembler6502::string> Disassembler6502::to_string() const {
 
 		if (instruction->addressingMode == PROGRAM_COUNTER_RELATIVE_AM) {
 			// This char converstion removes data from the second Byte
-			// but in this instruction ther is only one argument, so its fine
+			// but in this addressing mode all instruction has one argument, so it's fine
 			operandVal = static_cast<char>(operand->to_ulong());
 			operandVal += static_cast<long>(currentDataOffset);
 		}

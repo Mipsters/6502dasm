@@ -42,24 +42,31 @@ int main()
 			data = strtol(hex, nullptr, 16);
 
 			if (!argNum.has_value()) {
+				// Print current address
 				printf("% 3zX:\t", disassembler.getCurrentDataOffset());
 			}
 			
+			// Print current Byte
 			printf("%02lX ", data.to_ulong());
 			
 			disassembler.analyze(data);
 
-			Disassembler6502::InstructionStruct instruction = *disassembler.getInstruction();
+			ETL_OR_STD::optional<const Disassembler6502::InstructionStruct> instruction = disassembler.getInstruction();
 
-			// print when done
-			if (disassembler.getInstructionStatus() == Disassembler6502::EXECUTING_INSTRUCTION) {
+			// print instruction text
+			if (!instruction.has_value()) {
+				std::cout
+					<< std::setfill(' ') << std::setw(3 * 2) << "\t"
+					<< "???" << '\n';
+			}
+			else if (disassembler.getInstructionStatus() == Disassembler6502::EXECUTING_INSTRUCTION) {
 				std::cout 
-					<< std::setfill(' ') << std::setw(3 * (2 - instruction.argumentNumber)) << "\t"
-					<< instruction.instructionString.c_str() << ' ' << disassembler.to_string()->c_str() << '\n';
+					<< std::setfill(' ') << std::setw(3 * (2 - instruction->argumentNumber)) << "\t"
+					<< instruction->instructionString.c_str() << ' ' << disassembler.to_string()->c_str() << '\n';
 			}
 
 			if (!argNum.has_value()) {
-				argNum = instruction.argumentNumber;
+				argNum = instruction.has_value() ? instruction->argumentNumber : 0;
 			}
 			i += 2;
 		} while ((*argNum)-- > 0);

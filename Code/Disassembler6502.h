@@ -1,5 +1,5 @@
-#ifndef DISASSEMBLER_H
-#define DISASSEMBLER_H
+#ifndef DISASSEMBLER_6502_H
+#define DISASSEMBLER_6502_H
 
 
 #ifdef USE_ETL
