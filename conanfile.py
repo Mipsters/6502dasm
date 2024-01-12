@@ -14,20 +14,17 @@ class Dasm6502Conan(ConanFile):
     RESOURCES_FOLDER_NAME = "Resources"
 
     def requirements(self):
-        self.requires("etl/20.24.1")
+        self.requires("etl/20.32.1")
 
     def validate(self):
         pass
 
-    def imports(self):
-        self.copy("*.h", dst=Dasm6502Conan.RESOURCES_FOLDER_NAME)
-
     def package_info(self):
-        self.cpp_info.includedirs = [rf"..\${Dasm6502Conan.RESOURCES_FOLDER_NAME}\include"]
+        #self.cpp_info.includedirs = [rf"..\${Dasm6502Conan.RESOURCES_FOLDER_NAME}\include"]
         self.cpp_info.defines = ["USE_ETL"] if self.settings.use_etl else []
 
     def build(self):
         if self.settings.os == "Windows":
             msbuild = MSBuild(self)
-            msbuild.build_env.include_paths(rf"..\${Dasm6502Conan.RESOURCES_FOLDER_NAME}\include")
+            # msbuild.build_env.include_paths(rf"..\${Dasm6502Conan.RESOURCES_FOLDER_NAME}\include")
             msbuild.build(r"VisualStudio\6502dasm.sln")

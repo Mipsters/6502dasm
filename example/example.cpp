@@ -1,7 +1,3 @@
-#include <iostream>
-#include <iomanip>
-
-
 #ifdef USE_ETL
 #define ETL_NO_STL
 #include <etl/platform.h>
@@ -9,7 +5,11 @@
 #define ETL_OR_STD std
 #endif
 
+
 #include "Disassembler6502.h"
+
+#include <iostream>
+#include <iomanip>
 
 
 int main()
